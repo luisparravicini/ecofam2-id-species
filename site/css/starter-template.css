@@ -1,0 +1,12 @@
+body {
+  padding-top: 5rem;
+}
+
+#question, #candidate-species {
+  padding: 3rem 1.5rem;
+  text-align: center;
+}
+
+#candidate-species {
+	border-top: 2px dotted #c0c0c0;
+}
