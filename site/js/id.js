@@ -1,7 +1,8 @@
 
+let identifier = new SpeciesIdentifier();
+
 function startId() {
-	let id = new MammalId();
-	id.start();
+	identifier.start();
 }
 
 

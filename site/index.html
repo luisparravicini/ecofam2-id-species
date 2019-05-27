@@ -24,6 +24,10 @@
         font-weight: bold;
       }
 
+      .matcher {
+        display: none;
+      }
+
       @media (min-width: 768px) {
         .bd-placeholder-img-lg {
           font-size: 3.5rem;
@@ -76,37 +80,43 @@
 
 <main role="main" class="container">
 
-<div class="row">
-  <div class="col">
-    <p class="text-center">¿Que tipo de animal estás viendo?</p>
+<div id="matcher-first" class="matcher">
+  <div class="row">
+    <div class="col">
+      <p class="text-center">¿Que tipo de animal estás viendo?</p>
+    </div>
   </div>
-</div>
-<div class="row">
-  <div class="col"></div>
-  <div class="col col-3">
-    <buton class="btn btn-primary btn-block">Tortuga</buton>
+  <div class="row">
+    <div class="col"></div>
+    <div class="col col-3">
+      <buton class="btn btn-primary btn-block">Tortuga</buton>
+    </div>
+    <div class="col col-3">
+      <buton class="btn btn-primary btn-block">Ave</buton>
+    </div>
+    <div class="col col-3">
+      <buton class="btn btn-primary btn-block">Otro</buton>
+    </div>
+    <div class="col"></div>
   </div>
-  <div class="col col-3">
-    <buton class="btn btn-primary btn-block">Ave</buton>
-  </div>
-  <div class="col col-3">
-    <buton class="btn btn-primary btn-block">Otro</buton>
-  </div>
-  <div class="col"></div>
 </div>
 
+<div id="matcher-mammals" class="matcher">
   <div id="question">
   </div>
 
-  <div id="candidate-species">
+  <div id="candidate-species" class="matcher">
   </div>
+</div>
 
 </main><!-- /.container -->
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script>window.jQuery || document.write('<script src="bootstrap-4.3.1-dist/js/vendor/jquery-slim.min.js"><\/script>')</script><script src="bootstrap-4.3.1-dist/js/bootstrap.bundle.min.js"></script>
 
-<script src="js/mammals.js"></script>
+<script src="js/mammals_matcher.js"></script>
+<script src="js/initial_matcher.js"></script>
+<script src="js/species_identifier.js"></script>
 <script src="js/id.js"></script>
 
 </body>

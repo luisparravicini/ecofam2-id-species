@@ -6,16 +6,16 @@ require 'csv'
 data = CSV.parse(IO.read('Clave dicotómica mamíferos marinos - Sheet1.csv'))
 
 
-print "let species = ["
+print "\t\tthis.species = ["
 print data[0][1..-1].map { |x| "\"#{x}\"" }.join(', ')
-puts "];"
+puts "\t\t];"
 
-puts "let data = ["
+puts "\t\tthis.data = ["
 data[1..-1].each do |row|
 	jsrow = []
 	jsrow << "\"#{row[0]}\""
 	jsrow += row[1..-1].map { |x| x == '1' }
 
-	puts '[%s],' % jsrow.join(', ')
+	puts "\t\t\t[%s]," % jsrow.join(', ')
 end
 puts "];"

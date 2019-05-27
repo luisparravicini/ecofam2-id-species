@@ -1,0 +1,9 @@
+
+class InitialMatcher
+{
+	constructor() {}
+
+	start() {
+	
+	}
+}
