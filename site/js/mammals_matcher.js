@@ -16,6 +16,15 @@ class MammalsMatcher {
 
 		this.candidates = null;
 		this.questionsAsked = null;
+		this.matcherDiv = $('#matcher-mammals');
+	}
+
+	enters() {
+		this.matcherDiv.show();
+	}
+
+	exits() {
+		this.matcherDiv.hide();
 	}
 
 
@@ -99,9 +108,12 @@ class MammalsMatcher {
 		});
 	}
 
-	askNextQuestion() {
+	askNextQuestion(resolve) {
 		this.askQuestion().then((data) => {
-			if (data.noMoreQuestions) return;
+			if (data.noMoreQuestions) {
+				resolve(null);
+				return;
+			}
 
 	console.log("answer: " + data.answeredYes);
 			this.answerQuestion(data.questionIndex, data.answeredYes);
@@ -109,18 +121,20 @@ class MammalsMatcher {
 	console.log("candidates: " + this.candidates.length);
 	console.log("-----------------------");
 
-			this.askNextQuestion();
+			this.askNextQuestion(resolve);
 		});
 	}
 
 	start() {
-		this.questionsAsked = [];
-		this.candidates = [];
-		for (let i = 0; i < this.species.length; i++)
-			this.candidates.push(i);
-		this.showCandidates();
+		return new Promise((resolve, reject) => {
+			this.questionsAsked = [];
+			this.candidates = [];
+			for (let i = 0; i < this.species.length; i++)
+				this.candidates.push(i);
+			this.showCandidates();
 
-		this.askNextQuestion();
+			this.askNextQuestion(resolve);
+		});
 	}
 
 }
