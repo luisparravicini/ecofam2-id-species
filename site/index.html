@@ -37,6 +37,24 @@
         color: rgba(255,255,255,.5);
       }
 
+      .hdr {
+        font-size: 1.2em;
+        margin-bottom: 3.5em;
+      }
+
+      .sub {
+        font-size: 0.85em;
+      }
+
+      .img-center {
+        text-align: center;
+        vertical-align: bottom;
+      }
+
+      .img-center img {
+        max-width: 100%;
+      }
+
       @media (min-width: 768px) {
         .bd-placeholder-img-lg {
           font-size: 3.5rem;
@@ -114,10 +132,20 @@
 
 
 <div id="matcher-mammals" class="matcher">
-  <div id="question">
+  <div class="row">
+    <div class="col">
+      <p class="text-center hdr"><b>Mamiferos</b></p>
+    </div>
   </div>
 
-  <div id="candidate-species">
+  <div class="row">
+    <div class="col">
+    <div id="question">
+    </div>
+
+    <div id="candidate-species">
+    </div>
+  </div>
   </div>
 </div>
 
@@ -126,19 +154,69 @@
 <div id="matcher-turtles" class="matcher">
   <div class="row">
     <div class="col">
-      <p class="text-center">tortu</p>
+      <p class="text-center hdr"><b>Tortugas</b></p>
     </div>
   </div>
   <div class="row">
     <div class="col"></div>
-    <div class="col col-3">
-      <buton id="btn-initial-tortuga" class="btn btn-primary btn-block">Tortuga</buton>
+    <div class="col col-2">
+      <p class="text-center">Caparazón flexible<br/>
+        <span class="sub">quillas o crestas / sin escudos o placas</span></p>
     </div>
-    <div class="col col-3">
-      <buton id="btn-initial-ave" class="btn btn-primary btn-block">Ave</buton>
+    <div class="col col-6">
+      <p class="text-center">Caparazón óseo<br/>
+      <span class="sub">sin crestas contínuas / escudos o placas grandes</span></p>
     </div>
-    <div class="col col-3">
-      <buton id="btn-initial-otro" class="btn btn-primary btn-block">Otro</buton>
+    <div class="col"></div>
+  </div>
+  <div class="row">
+    <div class="col"></div>
+    <div class="col col-2 img-center">
+      <p class="sub">&nbsp;</p>
+    </div>
+    <div class="col col-2 img-center">
+      <p class="sub">cuatro pares de escudos</p>
+    </div>
+    <div class="col col-2 img-center">
+      <p class="sub">cinco o seis pares de escudos</p>
+    </div>
+    <div class="col col-2 img-center">
+      <p class="sub">seis o más pares de escudos</p>
+    </div>
+    <div class="col"></div>
+  </div>
+    <div class="row">
+    <div class="col"></div>
+    <div class="col col-2 img-center">
+      <img src="images/tartaruga-1.png"/>
+    </div>
+    <div class="col col-2 img-center">
+      <img src="images/tartaruga-2.png"/>
+    </div>
+    <div class="col col-2 img-center">
+      <img src="images/tartaruga-3.png"/>
+    </div>
+    <div class="col col-2 img-center">
+      <img src="images/tartaruga-4.png"/>
+    </div>
+    <div class="col"></div>
+  </div>
+  <div class="row">
+    <div class="col"><p>&nbsp;</p></div>
+  </div>
+  <div class="row">
+    <div class="col"></div>
+    <div class="col col-2 img-center">
+      <p><b>Tortuga laud</b></buton>
+    </div>
+    <div class="col col-2 img-center">
+      <p><b>Tortuga verde</b></buton>
+    </div>
+    <div class="col col-2 img-center">
+      <p><b>Tortuga cabezona</b></buton>
+    </div>
+    <div class="col col-2 img-center">
+      <p><b>Tortuga olivácea</b></buton>
     </div>
     <div class="col"></div>
   </div>
@@ -152,6 +230,7 @@
 <script>window.jQuery || document.write('<script src="bootstrap-4.3.1-dist/js/vendor/jquery-slim.min.js"><\/script>')</script><script src="bootstrap-4.3.1-dist/js/bootstrap.bundle.min.js"></script>
 
 <script src="js/mammals_matcher.js"></script>
+<script src="js/turtles_matcher.js"></script>
 <script src="js/initial_matcher.js"></script>
 <script src="js/species_identifier.js"></script>
 <script src="js/id.js"></script>
