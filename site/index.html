@@ -28,6 +28,15 @@
         display: none;
       }
 
+      #breadcrumb .nav-link {
+        display: inline;
+      }
+
+      #breadcrumb li:not(:last-child):after {
+        content: '→';
+        color: rgba(255,255,255,.5);
+      }
+
       @media (min-width: 768px) {
         .bd-placeholder-img-lg {
           font-size: 3.5rem;
@@ -45,15 +54,14 @@
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-    <ul class="navbar-nav mr-auto">
- <!--      <li class="nav-item active">
+  <div class="collapse navbar-collapse">
+    <ul class="navbar-nav mr-auto" id="breadcrumb">
+<!--       <li class="nav-item active">
         <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" id="btn-reset" href="#">Reiniciar</a>
-      </li>
-  --><!--       <li class="nav-item">
+ -->
+ 
+<!--         <li class="nav-item">
         <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
       </li>
 
@@ -80,6 +88,8 @@
 
 <main role="main" class="container">
 
+
+
 <div id="matcher-initial" class="matcher">
   <div class="row">
     <div class="col">
@@ -101,6 +111,8 @@
   </div>
 </div>
 
+
+
 <div id="matcher-mammals" class="matcher">
   <div id="question">
   </div>
@@ -108,6 +120,31 @@
   <div id="candidate-species">
   </div>
 </div>
+
+
+
+<div id="matcher-turtles" class="matcher">
+  <div class="row">
+    <div class="col">
+      <p class="text-center">tortu</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col"></div>
+    <div class="col col-3">
+      <buton id="btn-initial-tortuga" class="btn btn-primary btn-block">Tortuga</buton>
+    </div>
+    <div class="col col-3">
+      <buton id="btn-initial-ave" class="btn btn-primary btn-block">Ave</buton>
+    </div>
+    <div class="col col-3">
+      <buton id="btn-initial-otro" class="btn btn-primary btn-block">Otro</buton>
+    </div>
+    <div class="col"></div>
+  </div>
+</div>
+
+
 
 </main><!-- /.container -->
 

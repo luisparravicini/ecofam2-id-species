@@ -3,6 +3,7 @@ class InitialMatcher
 {
 	constructor() {
 		this.matcherDiv = $('#matcher-initial');
+		this.name = 'Inicio';
 	}
 
 	enters() {
@@ -16,7 +17,7 @@ class InitialMatcher
 	start() {
 		return new Promise((resolve, reject) => {
 			$('#btn-initial-tortuga').one('click', x => {
-				resolve(null);
+				resolve(new TurtlesMatcher());
 			});
 			$('#btn-initial-ave').one('click', x => {
 				resolve(null);

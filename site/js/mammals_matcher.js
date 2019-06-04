@@ -2,6 +2,8 @@
 class MammalsMatcher {
 
 	constructor() {
+		this.name = 'Mamíferos';
+
 		this.species = ["Elefante marino del sur", "Lobo marino de un pelo", "Lobo marino de 2 pelos", "Ballena franca austral", "Ballena jorobada", "Cachalote", "Franciscana", "Marsopa espinosa", "Marsopa de anteojos", "Delfin comun", "Delfín nariz de botella", "Delfin oscuro", "Orca", "Falsa orca"];
 		this.data = [
 			["Aletas posteriores", true, true, true, false, false, false, false, false, false, false, false, false, false, false],
