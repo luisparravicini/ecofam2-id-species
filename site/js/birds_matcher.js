@@ -7,11 +7,15 @@ class BirdsMatcher
 		this.matcherDiv = $('#matcher-birds');
 		this.feetDiv = $('#matcher-birds-feet');
 		this.beakDiv = $('#matcher-birds-beak');
+		this.beakColor2Div = $('#matcher-birds-beak-color-2');
+		this.beakColor4Div = $('#matcher-birds-beak-color-4');
 		this.generalDiv = $('#matcher-birds-general');
 
 		this.selectedValues = {
 			feet: null,
 			beak: null,
+			beakColor2: null,
+			beakColor4: null,
 			wings: null,
 		};
 
@@ -21,7 +25,7 @@ class BirdsMatcher
 
 	initSpecies() {
 		this.species = [];
-		['color_pico', 'patas', 'picos'].forEach((k) => {
+		['color_pico_4', 'color_pico_2', 'patas', 'picos'].forEach((k) => {
 			let names = data[k].species;
 			names.forEach(name => {
 				if (!this.species.includes(name))
@@ -40,7 +44,7 @@ class BirdsMatcher
 	}
 
 	askFeetInfo(resolve) {
-		this._setupSection(
+		this._setupImageSection(
 			this.feetDiv,
 			'selected-bird-feet',
 			'pata',
@@ -49,7 +53,7 @@ class BirdsMatcher
 	}
 
 	askBeakInfo(resolve) {
-		this._setupSection(
+		this._setupImageSection(
 			this.beakDiv,
 			'selected-bird-beak',
 			'pico',
@@ -57,14 +61,43 @@ class BirdsMatcher
 		);
 	}
 
-	_setupSection(sectionElem, selectedAnswerElemId, imagePrefix, valueKey) {
+	askBeakColorInfo(resolve) {
+		let beak = this.selectedValues.beak;
+		if (beak != 2 && beak != 4) {
+			alert('Con la forma de pico seleccionada no se pueden mostrar colores de pico');
+			return;
+		}
+		let keySufix = beak.toString();
+		let node = (beak == 2 ? this.beakColor2Div : this.beakColor4Div);
+		let elems = data['color_pico_' + keySufix].data;
+		this._setupSection(
+			node,
+			'selected-bird-beak-color',
+			'beakColor' + keySufix,
+			function(selected, value) {
+				selected.append($('<p>').text(elems[value][0]));
+			}
+		);
+	}
+
+	_setupImageSection(sectionElem, selectedAnswerElemId, imagePrefix, valueKey) {
+		this._setupSection(sectionElem,
+			selectedAnswerElemId,
+			valueKey, function(node, value) {
+				node.append(`<img src="images/${imagePrefix}-${value}.png"/>`);
+			});
+
+
+	}
+
+	_setupSection(sectionElem, selectedAnswerElemId, valueKey, onSelected) {
 		sectionElem.find('button.answer').on('click', event => {
 			const elem = $(event.target);
 			const value = elem.data('answer');
 
 			var selected = $('#' + selectedAnswerElemId).empty();
 			if (value != '')
-				selected.append(`<img src="images/${imagePrefix}-${value}.png"/>`);
+				onSelected(selected, value);
 
 			this.selectedValues[valueKey] = value;
 			this._filterCandidates();
@@ -78,7 +111,9 @@ class BirdsMatcher
 	_showSection(section) {
 		[ this.feetDiv,
 			this.generalDiv,
-			this.beakDiv
+			this.beakDiv,
+			this.beakColor2Div,
+			this.beakColor4Div,
 		].forEach(x => {
 			x.toggle( section == x );
 		})
