@@ -6,7 +6,7 @@
     <title>Mamíferos marinos</title>
 
     <!-- Bootstrap core CSS -->
-<link href="bootstrap-4.3.1-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="bootstrap-4.3.1-dist/css/bootstrap.min.css" rel="stylesheet">
 
 
     <style>
@@ -40,6 +40,7 @@
       .hdr {
         font-size: 1.2em;
         margin-bottom: 3.5em;
+        font-weight: bold;
       }
 
       .sub {
@@ -107,6 +108,41 @@
 <main role="main" class="container">
 
 
+  <div id="matcher-birds" class="matcher">
+    <div class="row">
+      <div class="col">
+        <p class="text-center hdr">Aves</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col"></div>
+      <div class="col">
+        <buton id="btn-birds-foot" class="btn btn-primary">¿Se ven las patas?</buton>
+      </div>
+      <div class="col">
+        <buton id="btn-birds-beak" class="btn btn-primary">¿Se ve el pico?</buton>
+      </div>
+      <div class="col">
+        <buton id="btn-birds-feather" class="btn btn-primary">¿Se ven las alas?</buton>
+      </div>
+      <div class="col"></div>
+    </div>
+
+    <div class="row">
+      <div class="col"><p>&nbsp;</p></div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <div id="birds-candidate-species">
+        </div>
+    </div>
+    </div>
+  </div>
+
+
+
 
 <div id="matcher-initial" class="matcher">
   <div class="row">
@@ -134,7 +170,7 @@
 <div id="matcher-mammals" class="matcher">
   <div class="row">
     <div class="col">
-      <p class="text-center hdr"><b>Mamiferos</b></p>
+      <p class="text-center hdr">Mamiferos</p>
     </div>
   </div>
 
@@ -154,7 +190,7 @@
 <div id="matcher-turtles" class="matcher">
   <div class="row">
     <div class="col">
-      <p class="text-center hdr"><b>Tortugas</b></p>
+      <p class="text-center hdr">Tortugas</p>
     </div>
   </div>
   <div class="row">
@@ -207,19 +243,20 @@
   <div class="row">
     <div class="col"></div>
     <div class="col col-2 img-center">
-      <p><b>Tortuga laud</b></buton>
+      <p><b>Tortuga laud</b></p>
     </div>
     <div class="col col-2 img-center">
-      <p><b>Tortuga verde</b></buton>
+      <p><b>Tortuga verde</b></p>
     </div>
     <div class="col col-2 img-center">
-      <p><b>Tortuga cabezona</b></buton>
+      <p><b>Tortuga cabezona</b></p>
     </div>
     <div class="col col-2 img-center">
-      <p><b>Tortuga olivácea</b></buton>
+      <p><b>Tortuga olivácea</b></p>
     </div>
     <div class="col"></div>
   </div>
+
 </div>
 
 
@@ -230,6 +267,7 @@
 <script>window.jQuery || document.write('<script src="bootstrap-4.3.1-dist/js/vendor/jquery-slim.min.js"><\/script>')</script><script src="bootstrap-4.3.1-dist/js/bootstrap.bundle.min.js"></script>
 
 <script src="js/mammals_matcher.js"></script>
+<script src="js/birds_matcher.js"></script>
 <script src="js/turtles_matcher.js"></script>
 <script src="js/initial_matcher.js"></script>
 <script src="js/species_identifier.js"></script>

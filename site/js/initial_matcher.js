@@ -20,7 +20,7 @@ class InitialMatcher
 				resolve(new TurtlesMatcher());
 			});
 			$('#btn-initial-ave').one('click', x => {
-				resolve(null);
+				resolve(new BirdsMatcher());
 			});
 			$('#btn-initial-otro').one('click', x => {
 				resolve(new MammalsMatcher());
