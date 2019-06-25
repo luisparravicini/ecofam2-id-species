@@ -2,11 +2,71 @@ body {
   padding-top: 5rem;
 }
 
-#question, #candidate-species {
+#question, .candidate-species {
   padding: 3rem 1.5rem;
   text-align: center;
 }
 
-#candidate-species {
+.candidate-species {
 	border-top: 2px dotted #c0c0c0;
+}
+
+
+.bd-placeholder-img {
+  font-size: 1.125rem;
+  text-anchor: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.candidate-species .hdr {
+  color: #505050;
+  font-weight: bold;
+}
+
+.matcher {
+  display: none;
+}
+
+#breadcrumb .nav-link {
+  display: inline;
+}
+
+#breadcrumb li:not(:last-child):after {
+  content: '→';
+  color: rgba(255,255,255,.5);
+}
+
+.hdr {
+  font-size: 1.2em;
+  margin-bottom: 3.5em;
+  font-weight: bold;
+}
+
+.sub {
+  font-size: 0.85em;
+}
+
+.img-center {
+  text-align: center;
+  vertical-align: bottom;
+}
+
+.img-center img {
+  max-width: 100%;
+}
+
+@media (min-width: 768px) {
+  .bd-placeholder-img-lg {
+    font-size: 3.5rem;
+  }
+}
+
+#matcher-birds img {
+	height: 8em;
+  max-width: 10em;
+  margin-bottom: 0.5em;
+  margin-top: 0.5em;
 }

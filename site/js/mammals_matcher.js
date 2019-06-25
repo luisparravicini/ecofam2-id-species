@@ -4,21 +4,14 @@ class MammalsMatcher {
 	constructor() {
 		this.name = 'Mamíferos';
 
-		this.species = ["Elefante marino del sur", "Lobo marino de un pelo", "Lobo marino de 2 pelos", "Ballena franca austral", "Ballena jorobada", "Cachalote", "Franciscana", "Marsopa espinosa", "Marsopa de anteojos", "Delfin comun", "Delfín nariz de botella", "Delfin oscuro", "Orca", "Falsa orca"];
-		this.data = [
-			["Aletas posteriores", true, true, true, false, false, false, false, false, false, false, false, false, false, false],
-			["Menos de 2,3 m de largo", false, false, true, false, false, false, true, true, true, false, false, true, false, false],
-			["Con barbas", false, false, false, true, true, false, false, false, false, false, false, false, false, false],
-			["Más de 3 m de largo", true, false, false, true, true, true, false, false, false, false, true, false, true, true],
-			["Cuerpo totalmente negro", false, false, false, false, false, false, false, true, false, false, false, false, false, true],
-			["Cuerpo blanco y negro", false, false, false, false, false, false, false, false, true, false, false, false, true, false],
-			["Aleta dorsal presente", false, false, false, false, true, true, true, true, true, true, true, true, true, true],
-			["Hocico muy fino, color uniforme", false, false, false, false, false, false, true, false, false, false, false, false, false, false],
-		];
-
-		this.candidates = new Candidates(this.species, $('#candidate-species'));
-		this.questionsAsked = null;
 		this.matcherDiv = $('#matcher-mammals');
+
+		let mammal_data = data['mamiferos_marinos'];
+		this.species =  mammal_data.species;
+		this.data = mammal_data.data;
+
+		this.candidates = new Candidates(this.species, this.matcherDiv.find('.candidate-species'));
+		this.questionsAsked = null;
 	}
 
 	enters() {

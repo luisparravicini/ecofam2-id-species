@@ -3,65 +3,11 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Mamíferos marinos</title>
+    <title>Animales emplayados</title>
 
     <!-- Bootstrap core CSS -->
     <link href="bootstrap-4.3.1-dist/css/bootstrap.min.css" rel="stylesheet">
 
-
-    <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-      }
-
-      #candidate-species .hdr {
-        color: #505050;
-        font-weight: bold;
-      }
-
-      .matcher {
-        display: none;
-      }
-
-      #breadcrumb .nav-link {
-        display: inline;
-      }
-
-      #breadcrumb li:not(:last-child):after {
-        content: '→';
-        color: rgba(255,255,255,.5);
-      }
-
-      .hdr {
-        font-size: 1.2em;
-        margin-bottom: 3.5em;
-        font-weight: bold;
-      }
-
-      .sub {
-        font-size: 0.85em;
-      }
-
-      .img-center {
-        text-align: center;
-        vertical-align: bottom;
-      }
-
-      .img-center img {
-        max-width: 100%;
-      }
-
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-    </style>
     <!-- Custom styles for this template -->
     <link href="css/starter-template.css" rel="stylesheet">
   </head>
@@ -107,24 +53,32 @@
 
 <main role="main" class="container">
 
-
   <div id="matcher-birds" class="matcher">
-    <div class="row">
-      <div class="col">
-        <p class="text-center hdr">Aves</p>
+
+    <div id="matcher-birds-feet" class="matcher">
+      <div class="row">
+        <div class="col">
+          <p class="text-center hdr">Patas de aves</p>
+        </div>
       </div>
-    </div>
 
     <div class="row">
       <div class="col"></div>
-      <div class="col">
-        <buton id="btn-birds-foot" class="btn btn-primary">¿Se ven las patas?</buton>
+      <div class="col-2 img-center">
+        <img src="images/pata-1.png"/>
+        <button class="btn btn-primary answer" data-answer="1">Seleccionar</button>
       </div>
-      <div class="col">
-        <buton id="btn-birds-beak" class="btn btn-primary">¿Se ve el pico?</buton>
+      <div class="col-2 img-center">
+        <img src="images/pata-2.png"/>
+        <button class="btn btn-primary answer" data-answer="2">Seleccionar</button>
       </div>
-      <div class="col">
-        <buton id="btn-birds-feather" class="btn btn-primary">¿Se ven las alas?</buton>
+      <div class="col-2 img-center">
+        <img src="images/pata-3.png"/>
+        <button class="btn btn-primary answer" data-answer="3">Seleccionar</button>
+      </div>
+      <div class="col-2 img-center">
+        <img src="images/pata-4.png"/>
+        <button class="btn btn-primary answer" data-answer="4">Seleccionar</button>
       </div>
       <div class="col"></div>
     </div>
@@ -134,11 +88,94 @@
     </div>
 
     <div class="row">
-      <div class="col">
-        <div id="birds-candidate-species">
+      <div class="col col-5"></div>
+      <div class="col text-center">
+         <button class="btn btn-primary answer" data-answer="">Otra</button>
+      </div>
+      <div class="col col-5"></div>
+    </div>
+
+    </div>
+
+
+    <div id="matcher-birds-beak" class="matcher">
+      <div class="row">
+        <div class="col">
+          <p class="text-center hdr">Picos de aves</p>
         </div>
+      </div>
+
+    <div class="row">
+      <div class="col"></div>
+      <div class="col-2 img-center">
+        <img src="images/pico-1.png"/>
+        <button class="btn btn-primary answer" data-answer="1">Seleccionar</button>
+      </div>
+      <div class="col-2 img-center">
+        <img src="images/pico-2.png"/>
+        <button class="btn btn-primary answer" data-answer="2">Seleccionar</button>
+      </div>
+      <div class="col-2 img-center">
+        <img src="images/pico-3.png"/>
+        <button class="btn btn-primary answer" data-answer="3">Seleccionar</button>
+      </div>
+      <div class="col-2 img-center">
+        <img src="images/pico-4.png"/>
+        <button class="btn btn-primary answer" data-answer="4">Seleccionar</button>
+      </div>
+      <div class="col"></div>
     </div>
+
+    <div class="row">
+      <div class="col"><p>&nbsp;</p></div>
     </div>
+
+    <div class="row">
+      <div class="col col-5"></div>
+      <div class="col text-center">
+         <button class="btn btn-primary answer" data-answer="">Otro</button>
+      </div>
+      <div class="col col-5"></div>
+    </div>
+
+    </div>
+
+
+    <div id="matcher-birds-general" class="matcher">
+      <div class="row">
+        <div class="col">
+          <p class="text-center hdr">Aves</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col"></div>
+        <div class="col text-center">
+          <buton id="btn-birds-foot" class="btn btn-primary">Patas</buton>
+          <div id="selected-bird-feet"></div>
+        </div>
+        <div class="col text-center">
+          <buton id="btn-birds-beak" class="btn btn-primary">Forma del pico</buton>
+          <div id="selected-bird-beak"></div>
+        </div>
+        <div class="col text-center">
+          <buton id="btn-birds-feather" class="btn btn-primary">Color del pico</buton>
+        </div>
+        <div class="col"></div>
+      </div>
+
+      <div class="row">
+        <div class="col"><p>&nbsp;</p></div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <div class="candidate-species">
+          </div>
+      </div>
+      </div>
+    </div>
+
   </div>
 
 
@@ -176,12 +213,9 @@
 
   <div class="row">
     <div class="col">
-    <div id="question">
+      <div id="question"></div>
+      <div class="candidate-species"></div>
     </div>
-
-    <div id="candidate-species">
-    </div>
-  </div>
   </div>
 </div>
 
@@ -221,7 +255,7 @@
     </div>
     <div class="col"></div>
   </div>
-    <div class="row">
+  <div class="row">
     <div class="col"></div>
     <div class="col col-2 img-center">
       <img src="images/tartaruga-1.png"/>
@@ -266,6 +300,7 @@
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script>window.jQuery || document.write('<script src="bootstrap-4.3.1-dist/js/vendor/jquery-slim.min.js"><\/script>')</script><script src="bootstrap-4.3.1-dist/js/bootstrap.bundle.min.js"></script>
 
+<script src="js/data.js"></script>
 <script src="js/candidates.js"></script>
 <script src="js/mammals_matcher.js"></script>
 <script src="js/birds_matcher.js"></script>
