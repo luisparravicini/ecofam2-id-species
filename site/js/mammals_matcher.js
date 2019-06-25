@@ -16,7 +16,7 @@ class MammalsMatcher {
 			["Hocico muy fino, color uniforme", false, false, false, false, false, false, true, false, false, false, false, false, false, false],
 		];
 
-		this.candidates = null;
+		this.candidates = new Candidates(this.species, $('#candidate-species'));
 		this.questionsAsked = null;
 		this.matcherDiv = $('#matcher-mammals');
 	}
@@ -37,12 +37,6 @@ class MammalsMatcher {
 	  return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
 	}
 
-	showCandidates() {
-		let node = $('#candidate-species').empty();
-		node.append('<p class="hdr">Posibles especies</p>');
-		node.append('<p>' + this.candidates.map(x => this.species[x]).join(', ') + '</p>');
-	}
-
 	findNextQuestion() {
 		// if (questionsAsked.length == 0)
 		// 	return 0;
@@ -54,16 +48,16 @@ class MammalsMatcher {
 			if (alreadyAsked)
 				return false;
 
-			let yesCount = this.candidates.reduce((accum, candidateId) => {
+			let yesCount = this.candidates.candidates.reduce((accum, candidateId) => {
 				return accum + (row[candidateId+1] == true ? 1 : 0);
 			}, 0);
 
 			// sirven las preguntas donde con la respuesta si/no
 			// se puede particionar candidates en dos grupos
 			// no vacios
-			let includeQuestion = (yesCount != 0 && yesCount != this.candidates.length);
+			let includeQuestion = (yesCount != 0 && yesCount != this.candidates.length());
 			if (includeQuestion) {
-	console.log("q:" + row[0] + " -> " + yesCount + "/" + this.candidates.length);
+	console.log("q:" + row[0] + " -> " + yesCount + "/" + this.candidates.length());
 				q.push(rowIndex);
 			}
 		});
@@ -80,9 +74,9 @@ class MammalsMatcher {
 		this.data[questionIndex].forEach((value, index) => {
 			if (index > 0) {
 				if (answeredYes && !value || !answeredYes && value) {
-					let candidateIndex = this.candidates.indexOf(index - 1);
+					let candidateIndex = this.candidates.candidates.indexOf(index - 1);
 					if (candidateIndex > -1) {
-						this.candidates.splice(candidateIndex, 1);
+						this.candidates.candidates.splice(candidateIndex, 1);
 					}
 				}
 			}
@@ -119,8 +113,8 @@ class MammalsMatcher {
 
 	console.log("answer: " + data.answeredYes);
 			this.answerQuestion(data.questionIndex, data.answeredYes);
-			this.showCandidates();
-	console.log("candidates: " + this.candidates.length);
+			this.candidates.show();
+	console.log("candidates: " + this.candidates.length());
 	console.log("-----------------------");
 
 			this.askNextQuestion(resolve);
@@ -128,12 +122,11 @@ class MammalsMatcher {
 	}
 
 	start() {
+		this.candidates.init();
+
 		return new Promise((resolve, reject) => {
 			this.questionsAsked = [];
-			this.candidates = [];
-			for (let i = 0; i < this.species.length; i++)
-				this.candidates.push(i);
-			this.showCandidates();
+			this.candidates.show();
 
 			this.askNextQuestion(resolve);
 		});
