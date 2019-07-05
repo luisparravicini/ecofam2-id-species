@@ -100,10 +100,11 @@ class BirdsMatcher
 	_setupSection(sectionElem, selectedAnswerElemId, valueKey, onSelected) {
 		sectionElem.find('button.answer').unbind().on('click', event => {
 			const elem = $(event.target);
-			const value = elem.data('answer');
+			let value = elem.data('answer');
+			if (value == '') value = null;
 
 			var selected = $('#' + selectedAnswerElemId).empty();
-			if (value != '')
+			if (value != null)
 				onSelected(selected, value);
 
 			this.selectedValues[valueKey] = value;
@@ -130,15 +131,65 @@ class BirdsMatcher
 		// el poder 'cancelar' un filtro hace que tenga que recalcular todo
 		this._initCandidates();
 		
+		console.log(this.selectedValues);
+
+		let keys = [
+			{ dataKey: 'patas', value: this.selectedValues.feet },
+			{ dataKey: 'picos', value: this.selectedValues.beak },
+			{ dataKey: 'color_pico_2', value: this.selectedValues.beakColor2 },
+			{ dataKey: 'color_pico_4', value: this.selectedValues.beakColor4 },
+		];
+		keys.forEach(x => {
+			let indexes = this._getSpeciesIndexes(x.value, x.dataKey);
+			this._filterSpecies(indexes);
+		});
+
 		this.candidates.show();
+	}
+
+	_filterSpecies(indexes) {
+		if (indexes != null) {
+			let c = this.candidates.candidates;
+			let i = c.length - 1;
+			while (i >= 0 && c.length > 0) {
+				if (!indexes.includes(c[i]))
+					c.splice(i, 1);
+				i -= 1;
+			}
+		}
+	}
+
+	_getSpeciesIndexes(value, dataKey) {
+		let result = null;
+
+		if (value != null) {
+			let curData = data[dataKey];
+			let items = curData.data[value - 1];
+			let i = 0;
+			result = [];
+			while (i < items.length) {
+				if (items[i]) {
+					let spName = curData.species[i];
+					let speciesIndex = this.candidates.species.indexOf(spName);
+					if (speciesIndex == -1)
+						console.log(`Species: '${spName}' not found`);
+
+					result.push(speciesIndex);
+				}
+				i += 1;
+			}
+		}
+
+		return result;
 	}
 
 	_initCandidates() {
 		this.candidates = new Candidates(this.species, this.matcherDiv.find('.candidate-species'));
+		this.candidates.init();
 	}
 
 	start() {
-		this.candidates.init();
+		this._initCandidates();
 
 		return new Promise((resolve, reject) => {
 			this.candidates.show();
