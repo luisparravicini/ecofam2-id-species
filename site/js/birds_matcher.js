@@ -4,11 +4,15 @@ class BirdsMatcher
 	constructor() {		
 		this.name = 'Aves';
 
+		this.feetSelectorId = '#matcher-birds-feet';
+		this.beakSelectorId = '#matcher-birds-beak';
+		this.beakColorSelectorIdBase = '#matcher-birds-beak-color-';
+
 		this.matcherDiv = $('#matcher-birds');
-		this.feetDiv = $('#matcher-birds-feet');
-		this.beakDiv = $('#matcher-birds-beak');
-		this.beakColor2Div = $('#matcher-birds-beak-color-2');
-		this.beakColor4Div = $('#matcher-birds-beak-color-4');
+		this.feetDiv = $(this.feetSelectorId);
+		this.beakDiv = $(this.beakSelectorId);
+		this.beakColor2Div = $(this.beakColorSelectorIdBase + '2');
+		this.beakColor4Div = $(this.beakColorSelectorIdBase + '4');
 		this.generalDiv = $('#matcher-birds-general');
 		this.selectedBeakColorId = 'selected-bird-beak-color';
 
@@ -37,27 +41,58 @@ class BirdsMatcher
 		this.matcherDiv.hide();
 	}
 
+	_findFutureEnabledStates(valueKey, selectorId) {
+		let oldValue = this.selectedValues[valueKey];
+		let self = this;
+		let enabledStates = [];
+		$(selectorId + ' button.answer').each(function() {
+			let value = $(this).data('answer');
+			if (value == '') value = null;
+			
+			self.selectedValues[valueKey] = value;
+			self._filterCandidates();
+
+			let willHaveCandidates = (self.candidates.candidates.length > 0);
+			enabledStates.push(willHaveCandidates);
+		});
+
+		this.selectedValues[valueKey] = oldValue;
+		this._filterCandidates();
+
+		return enabledStates;
+	}
+
 	askFeetInfo(resolve) {
+		let valueKey = 'feet';
+		let selectorId = this.feetSelectorId;
+		let enabledStates = this._findFutureEnabledStates(valueKey, selectorId);
+
 		this._setupImageSection(
 			this.feetDiv,
 			'selected-bird-feet',
 			'pata',
-			'feet',
-			null
+			valueKey,
+			null,
+			enabledStates
 		);
 	}
 
 	askBeakInfo(resolve) {
-		let oldValue = this.selectedValues.beak;
+		let valueKey = 'beak';
+		let selectorId = this.beakSelectorId;
+		let oldValue = this.selectedValues[valueKey];
+		let enabledStates = this._findFutureEnabledStates(valueKey, selectorId);
+
 		this._setupImageSection(
 			this.beakDiv,
 			'selected-bird-beak',
 			'pico',
-			'beak',
+			valueKey,
 			(_, value) => {
 				if (value != oldValue)
 					$('#' + this.selectedBeakColorId).empty();
-			}
+			},
+			enabledStates
 		);
 	}
 
@@ -70,28 +105,42 @@ class BirdsMatcher
 		let keySufix = beak.toString();
 		let node = (beak == 2 ? this.beakColor2Div : this.beakColor4Div);
 		let elems = data['color_pico_' + keySufix].data;
+
+		let valueKey = 'beakColor' + keySufix;
+		let selectorId = this.beakColorSelectorIdBase + beak;
+		let enabledStates = this._findFutureEnabledStates(valueKey, selectorId);
+
 		this._setupSection(
 			node,
 			this.selectedBeakColorId,
-			'beakColor' + keySufix,
+			valueKey,
 			(selected, value) => {
 				selected.append($('<p>').text(elems[value - 1][0]));
-			}
+			},
+			enabledStates
 		);
 	}
 
-	_setupImageSection(sectionElem, selectedAnswerElemId, imagePrefix, valueKey, onSelectedValue) {
+	_setupImageSection(sectionElem, selectedAnswerElemId, imagePrefix, valueKey, onSelectedValue, enabledStates) {
 		this._setupSection(sectionElem,
 			selectedAnswerElemId,
 			valueKey, function(node, value) {
 				node.append(`<img src="images/${imagePrefix}-${value}.png"/>`);
 				if (onSelectedValue != null)
 					onSelectedValue(node, value);
-			});
+			},
+			enabledStates);
 	}
 
-	_setupSection(sectionElem, selectedAnswerElemId, valueKey, onSelected) {
-		sectionElem.find('button.answer').unbind().on('click', event => {
+	_setupSection(sectionElem, selectedAnswerElemId, valueKey, onSelected, enabledStates) {
+		let buttons = sectionElem.find('button.answer');
+		if (enabledStates) {
+			// asumo que son los mismos botones, y en el mismo orden :|
+			enabledStates.forEach((value, index) => {
+					$(buttons[index]).prop('disabled', !value);
+			});
+		}
+		$(buttons).unbind().on('click', event => {
 			const elem = $(event.target);
 			let value = elem.data('answer');
 			if (value == '') value = null;
