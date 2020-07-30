@@ -25,14 +25,7 @@ class BirdsMatcher
 	}
 
 	_initSpecies() {
-		this.species = [];
-		['color_pico_4', 'color_pico_2', 'patas', 'picos'].forEach((k) => {
-			let names = data[k].species;
-			names.forEach(name => {
-				if (!this.species.includes(name))
-					this.species.push(name);
-			});
-		});
+		this.species = birdSpecies;
 	}
 
 	enters() {
@@ -166,11 +159,11 @@ class BirdsMatcher
 		if (value != null) {
 			let curData = data[dataKey];
 			let items = curData.data[value - 1];
-			let i = 0;
+			let i = 1;
 			result = [];
 			while (i < items.length) {
 				if (items[i]) {
-					let spName = curData.species[i];
+					let spName = this.species[i - 1];
 					let speciesIndex = this.candidates.species.indexOf(spName);
 					if (speciesIndex == -1)
 						console.log(`Species: '${spName}' not found`);
