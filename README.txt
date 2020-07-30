@@ -1,5 +1,8 @@
-README
-======
+#README
 
 
-- mk_data.rb lee el csv con las preguntas y genera una matriz en typescript, copiarla a site/js/id.js
+##Importar planilla
+
+  - exportar cada hoja a csv
+  - correr `mk_data.rb > site/js/data.js`, que genera una matriz en typescript con los datos
+
