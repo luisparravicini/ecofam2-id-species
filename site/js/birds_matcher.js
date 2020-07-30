@@ -82,7 +82,7 @@ class BirdsMatcher
 			this.selectedBeakColorId,
 			'beakColor' + keySufix,
 			(selected, value) => {
-				selected.append($('<p>').text(elems[value][0]));
+				selected.append($('<p>').text(elems[value - 1][0]));
 			}
 		);
 	}
