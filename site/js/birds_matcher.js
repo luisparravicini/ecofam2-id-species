@@ -148,14 +148,15 @@ class BirdsMatcher
 	}
 
 	_filterSpecies(indexes) {
-		if (indexes != null) {
-			let c = this.candidates.candidates;
-			let i = c.length - 1;
-			while (i >= 0 && c.length > 0) {
-				if (!indexes.includes(c[i]))
-					c.splice(i, 1);
-				i -= 1;
-			}
+		if (indexes == null)
+			return;
+
+		let c = this.candidates.candidates;
+		let i = c.length - 1;
+		while (i >= 0 && c.length > 0) {
+			if (!indexes.includes(c[i]))
+				c.splice(i, 1);
+			i -= 1;
 		}
 	}
 
