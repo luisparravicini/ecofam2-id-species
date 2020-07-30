@@ -1,18 +1,13 @@
 #!/usr/bin/env ruby -W
 
-
 require 'csv'
 
-
-SKIP_NAME = '_SKIP_'
-
+SKIP_NAME = '_SKIP_'.freeze
 
 def remove_unneeded_cols(file_data)
   cols_to_remove = []
   file_data[0].each_with_index do |col, index|
-    if col&.strip == SKIP_NAME
-      cols_to_remove << index
-    end
+    cols_to_remove << index if col&.strip == SKIP_NAME
   end
   cols_to_remove.reverse.each do |index|
     file_data.each do |row|
@@ -23,20 +18,18 @@ end
 
 data = {}
 Dir.glob(File.join('csv', '*.csv')).each do |path|
-
   file_data = CSV.parse(IO.read(path))
 
-  key = File.basename(path).downcase.
-    gsub(/^.+-/, '').
-    gsub(/\.csv$/, '').
-    strip.
-    gsub(/\W/, '_')
-
+  key = File.basename(path)
+            .downcase
+            .gsub(/^.+-/, '')
+            .gsub(/\.csv$/, '')
+            .strip
+            .gsub(/\W/, '_')
 
   remove_unneeded_cols(file_data)
   data[key] = { headers: file_data[0], data: file_data[1..-1] }
 end
-
 
 puts <<-EOT
 /*
@@ -51,7 +44,7 @@ data.each do |k, v|
 
   print "\t\tspecies: ["
   print v[:headers][1..-1].map { |x| "\"#{x}\"" }.join(', ')
-  puts "],"
+  puts '],'
 
   puts "\t\tdata: ["
   v[:data].each_with_index do |row, index|
@@ -69,4 +62,4 @@ data.each do |k, v|
   puts "\t},"
 end
 
-puts "}"
+puts '}'
