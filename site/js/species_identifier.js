@@ -12,9 +12,9 @@ class SpeciesIdentifier {
 	}
 
 	update() {
-		let navItem = $('<li class="nav-item">');
-		navItem.append(`<span class="nav-link">${this.currentMatcher.name}</span>`);
-		this.breadcrumb.append(navItem);
+		// let navItem = $('<li class="nav-item">');
+		// navItem.append(`<span class="nav-link">${this.currentMatcher.name}</span>`);
+		// this.breadcrumb.append(navItem);
 
 		this.currentMatcher.enters();
 
