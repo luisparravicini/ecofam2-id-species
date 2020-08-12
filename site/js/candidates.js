@@ -15,7 +15,7 @@ class Candidates
 
 	show() {
 		let node = this.node.empty();
-		node.append('<p class="hdr">Posibles especies</p>');
+		node.append('<p class="hdr">De acuerdo a tu selección al especie que observaste podría ser:</p>');
 		node.append('<p>' + this.candidates.map(x => this.species[x]).join(', ') + '</p>');
 	}
 
