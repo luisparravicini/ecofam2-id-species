@@ -47,10 +47,10 @@ let data = {
 	},
 	mamiferos_marinos: {
 		data: [
-			["Menos de 2,3 m de largo", false, false, false, false, false, false, false, false, false, true, false, false, false, false, false],
-			["Más de 3 m de largo", false, false, false, false, false, false, true, false, false, false, false, false, false, false, false],
-			["Menos de 2,3 m de largo", false, false, false, false, true, false, false, false, true, false, false, true, true, false, true],
-			["Más de 3 m de largo", true, true, true, false, false, true, false, true, false, false, false, false, false, true, false],
+			["Extremidades posteriores como aletas", false, false, false, false, false, false, true, false, false, true, false, false, false, false, false],
+			["Aleta caudal o cola", true, true, true, true, true, true, false, true, true, false, true, true, true, true, true],
+			["Menos de 2,3 m de largo", false, false, false, false, true, false, false, false, true, true, false, true, true, false, true],
+			["Más de 3 m de largo", true, true, true, false, false, true, true, true, false, false, false, false, false, true, false],
 			["Con barbas", false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
 			["Cuerpo totalmente negro", true, true, false, false, false, false, false, false, false, false, false, false, false, false, false],
 			["Cuerpo blanco y negro", false, false, false, false, false, false, false, true, false, false, false, false, true, false, false],

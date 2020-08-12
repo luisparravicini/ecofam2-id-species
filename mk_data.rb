@@ -55,8 +55,6 @@ mammal_species = data.values
 mammal_species.delete_if { |x| x.strip.empty? }
 mammal_species.delete_if { |x| birds_species.include?(x.strip) }
 
-all_species = birds_species + mammal_species
-
 # $stderr.puts data.inspect
 
 data.each do |k, v|
