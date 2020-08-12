@@ -32,10 +32,7 @@ Dir.glob(File.join('csv', '*.csv')).each do |path|
   data[key] = { headers: file_data[0], data: file_data[1..-1] }
 end
 
-# para testear
-data.delete('alas')
-
-birds_keys = ['color_pico_4', 'color_pico_2', 'patas', 'picos']
+birds_keys = ['color_pico_4', 'color_pico_2', 'patas', 'picos', 'alas']
 
 birds_species = []
 birds_keys.each do |key|

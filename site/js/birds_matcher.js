@@ -5,11 +5,13 @@ class BirdsMatcher
 		this.name = 'Aves';
 
 		this.feetSelectorId = '#matcher-birds-feet';
+		this.wingSelectorId = '#matcher-birds-wing';
 		this.beakSelectorId = '#matcher-birds-beak';
 		this.beakColorSelectorIdBase = '#matcher-birds-beak-color-';
 
 		this.matcherDiv = $('#matcher-birds');
 		this.feetDiv = $(this.feetSelectorId);
+		this.wingDiv = $(this.wingSelectorId);
 		this.beakDiv = $(this.beakSelectorId);
 		this.beakColor2Div = $(this.beakColorSelectorIdBase + '2');
 		this.beakColor4Div = $(this.beakColorSelectorIdBase + '4');
@@ -21,7 +23,7 @@ class BirdsMatcher
 			beak: null,
 			beakColor2: null,
 			beakColor4: null,
-			wings: null,
+			wing: null,
 		};
 
 		this._initSpecies();
@@ -60,6 +62,21 @@ class BirdsMatcher
 		this._filterCandidates();
 
 		return enabledStates;
+	}
+
+	askWingInfo(resolve) {
+		let valueKey = 'wing';
+		let selectorId = this.wingSelectorId;
+		let enabledStates = this._findFutureEnabledStates(valueKey, selectorId);
+
+		this._setupImageSection(
+			this.wingDiv,
+			'selected-bird-wing',
+			'alas',
+			valueKey,
+			null,
+			enabledStates
+		);
 	}
 
 	askFeetInfo(resolve) {
@@ -159,7 +176,8 @@ class BirdsMatcher
 	}
 
 	_showSection(section) {
-		[ this.feetDiv,
+		[ this.wingDiv,
+			this.feetDiv,
 			this.generalDiv,
 			this.beakDiv,
 			this.beakColor2Div,
@@ -180,6 +198,7 @@ class BirdsMatcher
 			{ dataKey: 'picos', value: this.selectedValues.beak },
 			{ dataKey: 'color_pico_2', value: this.selectedValues.beakColor2 },
 			{ dataKey: 'color_pico_4', value: this.selectedValues.beakColor4 },
+			{ dataKey: 'alas', value: this.selectedValues.wing },
 		];
 		keys.forEach(x => {
 			let indexes = this._getSpeciesIndexes(x.value, x.dataKey);
@@ -237,6 +256,9 @@ class BirdsMatcher
 		return new Promise((resolve, reject) => {
 			this.candidates.show();
 
+			$('#btn-birds-wing').unbind().on('click', x => {
+				this.askWingInfo(resolve);
+			});
 			$('#btn-birds-foot').unbind().on('click', x => {
 				this.askFeetInfo(resolve);
 			});

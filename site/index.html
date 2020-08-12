@@ -51,9 +51,43 @@
   </div>
 </nav>
 
-<main role="main" class="container">
+<main class="container">
 
   <div id="matcher-birds" class="matcher">
+
+    <div id="matcher-birds-wing" class="matcher">
+      <div class="row">
+        <div class="col">
+          <p class="text-center hdr">Alas</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-4"></div>
+        <div class="col-2 img-center">
+          <img src="images/alas-1.png"/>
+          <button class="btn btn-primary answer" data-answer="1">Seleccionar</button>
+        </div>
+        <div class="col-2 img-center">
+          <img src="images/alas-2.png"/>
+          <button class="btn btn-primary answer" data-answer="2">Seleccionar</button>
+        </div>
+        <div class="col-4"></div>
+      </div>
+
+      <div class="row">
+        <div class="col"><p>&nbsp;</p></div>
+      </div>
+
+      <div class="row">
+        <div class="col col-5"></div>
+        <div class="col text-center">
+           <button class="btn btn-primary answer" data-answer="">Otra</button>
+        </div>
+        <div class="col col-5"></div>
+      </div>
+
+    </div>
 
     <div id="matcher-birds-feet" class="matcher">
       <div class="row">
@@ -62,38 +96,38 @@
         </div>
       </div>
 
-    <div class="row">
-      <div class="col"></div>
-      <div class="col-2 img-center">
-        <img src="images/pata-1.png"/>
-        <button class="btn btn-primary answer" data-answer="1">Seleccionar</button>
+      <div class="row">
+        <div class="col"></div>
+        <div class="col-2 img-center">
+          <img src="images/pata-1.png"/>
+          <button class="btn btn-primary answer" data-answer="1">Seleccionar</button>
+        </div>
+        <div class="col-2 img-center">
+          <img src="images/pata-2.png"/>
+          <button class="btn btn-primary answer" data-answer="2">Seleccionar</button>
+        </div>
+        <div class="col-2 img-center">
+          <img src="images/pata-3.png"/>
+          <button class="btn btn-primary answer" data-answer="3">Seleccionar</button>
+        </div>
+        <div class="col-2 img-center">
+          <img src="images/pata-4.png"/>
+          <button class="btn btn-primary answer" data-answer="4">Seleccionar</button>
+        </div>
+        <div class="col"></div>
       </div>
-      <div class="col-2 img-center">
-        <img src="images/pata-2.png"/>
-        <button class="btn btn-primary answer" data-answer="2">Seleccionar</button>
-      </div>
-      <div class="col-2 img-center">
-        <img src="images/pata-3.png"/>
-        <button class="btn btn-primary answer" data-answer="3">Seleccionar</button>
-      </div>
-      <div class="col-2 img-center">
-        <img src="images/pata-4.png"/>
-        <button class="btn btn-primary answer" data-answer="4">Seleccionar</button>
-      </div>
-      <div class="col"></div>
-    </div>
 
-    <div class="row">
-      <div class="col"><p>&nbsp;</p></div>
-    </div>
-
-    <div class="row">
-      <div class="col col-5"></div>
-      <div class="col text-center">
-         <button class="btn btn-primary answer" data-answer="">Otra</button>
+      <div class="row">
+        <div class="col"><p>&nbsp;</p></div>
       </div>
-      <div class="col col-5"></div>
-    </div>
+
+      <div class="row">
+        <div class="col col-5"></div>
+        <div class="col text-center">
+           <button class="btn btn-primary answer" data-answer="">Otra</button>
+        </div>
+        <div class="col col-5"></div>
+      </div>
 
     </div>
 
@@ -225,15 +259,19 @@
       <div class="row">
         <div class="col"></div>
         <div class="col text-center">
-          <buton id="btn-birds-foot" class="btn btn-primary">Patas</buton>
+          <button id="btn-birds-wing" class="btn btn-primary">Alas</button>
+          <div id="selected-bird-wing"></div>
+        </div>
+        <div class="col text-center">
+          <button id="btn-birds-foot" class="btn btn-primary">Patas</button>
           <div id="selected-bird-feet"></div>
         </div>
         <div class="col text-center">
-          <buton id="btn-birds-beak" class="btn btn-primary">Forma del pico</buton>
+          <button id="btn-birds-beak" class="btn btn-primary">Forma del pico</button>
           <div id="selected-bird-beak"></div>
         </div>
         <div class="col text-center">
-          <buton id="btn-birds-feather" class="btn btn-primary">Color del pico</buton>
+          <button id="btn-birds-feather" class="btn btn-primary">Color del pico</button>
           <div id="selected-bird-beak-color"></div>
         </div>
         <div class="col"></div>
@@ -265,13 +303,13 @@
   <div class="row">
     <div class="col"></div>
     <div class="col col-3">
-      <buton id="btn-initial-tortuga" class="btn btn-primary btn-block">Tortuga</buton>
+      <button id="btn-initial-tortuga" class="btn btn-primary btn-block">Tortuga</button>
     </div>
     <div class="col col-3">
-      <buton id="btn-initial-ave" class="btn btn-primary btn-block">Ave</buton>
+      <button id="btn-initial-ave" class="btn btn-primary btn-block">Ave</button>
     </div>
     <div class="col col-3">
-      <buton id="btn-initial-otro" class="btn btn-primary btn-block">Otro</buton>
+      <button id="btn-initial-otro" class="btn btn-primary btn-block">Otro</button>
     </div>
     <div class="col"></div>
   </div>
