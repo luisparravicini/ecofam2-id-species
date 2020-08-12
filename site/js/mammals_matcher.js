@@ -6,9 +6,8 @@ class MammalsMatcher {
 
 		this.matcherDiv = $('#matcher-mammals');
 
-		let mammal_data = data['mamiferos_marinos'];
-		this.species =  mammal_data.species;
-		this.data = mammal_data.data;
+		this.species = mammalSpecies;
+		this.data = data['mamiferos_marinos'].data;
 
 		this.candidates = new Candidates(this.species, this.matcherDiv.find('.candidate-species'));
 		this.questionsAsked = null;
@@ -21,7 +20,6 @@ class MammalsMatcher {
 	exits() {
 		this.matcherDiv.hide();
 	}
-
 
 	// from https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
 	getRandomInt(min, max) {
@@ -49,6 +47,7 @@ class MammalsMatcher {
 			// se puede particionar candidates en dos grupos
 			// no vacios
 			let includeQuestion = (yesCount != 0 && yesCount != this.candidates.length());
+console.log("includeQuestion?", includeQuestion);
 			if (includeQuestion) {
 	console.log("q:" + row[0] + " -> " + yesCount + "/" + this.candidates.length());
 				q.push(rowIndex);
