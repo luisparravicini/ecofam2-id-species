@@ -70,3 +70,36 @@ body {
   margin-bottom: 0.5em;
   margin-top: 0.5em;
 }
+
+.beak-color {
+  width: 80px;
+  height: 30px;
+  border-radius: 8px;
+  margin: 0 auto 10px auto;
+}
+
+.beak-c-2-1 {
+  background: #892609;
+}
+.beak-c-2-2 {
+  background: #202020;
+}
+.beak-c-2-3 {
+  background: linear-gradient(90deg, #892609 50%, #202020 50%);
+}
+.beak-c-2-4 {
+  background: linear-gradient(90deg, #E9CE81 50%, #202020 50%);
+}
+
+.beak-c-4-1 {
+  background: linear-gradient(90deg, #E9CE81 50%, #892609 50%);
+}
+.beak-c-4-2 {
+  background: #202020;
+}
+.beak-c-4-3 {
+  background: linear-gradient(90deg, #E9CE81 50%, #202020 50%);
+}
+.beak-c-4-4 {
+  background: linear-gradient(90deg, #E9CE81 33%, #892609 33% 66%, #202020 66%);
+}
