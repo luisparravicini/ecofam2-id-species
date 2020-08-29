@@ -15,6 +15,7 @@ class BirdsMatcher
 		this.beakDiv = $(this.beakSelectorId);
 		this.beakColor2Div = $(this.beakColorSelectorIdBase + '2');
 		this.beakColor4Div = $(this.beakColorSelectorIdBase + '4');
+		this.beakColorNone = $(this.beakColorSelectorIdBase + 'other');
 		this.generalDiv = $('#matcher-birds-general');
 		this.selectedBeakColorId = 'selected-bird-beak-color';
 
@@ -115,17 +116,31 @@ class BirdsMatcher
 
 	askBeakColorInfo(resolve) {
 		let beak = this.selectedValues.beak;
-		if (beak != 2 && beak != 4) {
-			alert('Con la forma de pico seleccionada no se pueden mostrar colores de pico');
-			return;
-		}
-		let keySufix = beak.toString();
-		let node = (beak == 2 ? this.beakColor2Div : this.beakColor4Div);
-		let elems = data['color_pico_' + keySufix].data;
+		let allowBeakSelection = true;
+		let keySufix = null;
+		let elems = null;
+		let valueKey = null;
+		let selectorId = null;
+		let enabledStates = null;
 
-		let valueKey = 'beakColor' + keySufix;
-		let selectorId = this.beakColorSelectorIdBase + beak;
-		let enabledStates = this._findFutureEnabledStates(valueKey, selectorId);
+		let node = null;
+		if (beak == 2) {
+			node = this.beakColor2Div;
+		} else if (beak == 4) {
+			node = this.beakColor4Div;
+		} else {
+			node = this.beakColorNone;
+			allowBeakSelection = false;
+		}
+
+		if (allowBeakSelection) {
+			keySufix = beak.toString();
+			elems = data['color_pico_' + keySufix].data;
+
+			valueKey = 'beakColor' + keySufix;
+			selectorId = this.beakColorSelectorIdBase + beak;
+			enabledStates = this._findFutureEnabledStates(valueKey, selectorId);
+		}
 
 		this._setupSection(
 			node,
@@ -134,7 +149,12 @@ class BirdsMatcher
 			(selected, value) => {
 				selected.append($('<p>').text(elems[value - 1][0]));
 			},
-			enabledStates
+			enabledStates,
+			// TODO: esto es un parche
+			() => {
+				 this.selectedValues['beakColor2'] = null;
+				 this.selectedValues['beakColor4'] = null;
+			}
 		);
 	}
 
@@ -149,7 +169,7 @@ class BirdsMatcher
 			enabledStates);
 	}
 
-	_setupSection(sectionElem, selectedAnswerElemId, valueKey, onSelected, enabledStates) {
+	_setupSection(sectionElem, selectedAnswerElemId, valueKey, onSelected, enabledStates, onOther) {
 		let buttons = sectionElem.find('button.answer');
 		if (enabledStates) {
 			// asumo que son los mismos botones, y en el mismo orden :|
@@ -165,6 +185,8 @@ class BirdsMatcher
 			var selected = $('#' + selectedAnswerElemId).empty();
 			if (value != null)
 				onSelected(selected, value);
+
+			if (onOther) onOther();
 
 			this.selectedValues[valueKey] = value;
 			this._filterCandidates();
@@ -182,6 +204,7 @@ class BirdsMatcher
 			this.beakDiv,
 			this.beakColor2Div,
 			this.beakColor4Div,
+			this.beakColorNone,
 		].forEach(x => {
 			x.toggle( section == x );
 		})
@@ -190,8 +213,6 @@ class BirdsMatcher
 	_filterCandidates() {
 		// el poder 'cancelar' un filtro hace que tenga que recalcular todo
 		this._initCandidates();
-		
-		console.log(this.selectedValues);
 
 		let keys = [
 			{ dataKey: 'patas', value: this.selectedValues.feet },
