@@ -30,7 +30,8 @@ Dir.glob(File.join('csv', '*.csv')).each do |path|
             .gsub(/\W/, '_')
 
   remove_unneeded_cols(file_data)
-  data[key] = { headers: file_data[0], data: file_data[1..-1] }
+  species = file_data[0].map { |x| x&.unicode_normalize }
+  data[key] = { headers: species, data: file_data[1..-1] }
 end
 
 birds_keys = ['color_pico_4', 'color_pico_2', 'patas', 'picos', 'alas']
@@ -55,7 +56,8 @@ mammal_species = data.values
 mammal_species.delete_if { |x| x.strip.empty? }
 mammal_species.delete_if { |x| birds_species.include?(x.strip) }
 
-# $stderr.puts data.inspect
+all_species = birds_species + mammal_species
+$stderr.puts all_species
 
 data.each do |k, v|
   species = if birds_keys.include?(k)
