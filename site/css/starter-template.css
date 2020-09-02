@@ -103,6 +103,12 @@ body {
 .beak-c-4-4 {
   background: linear-gradient(90deg, #E9CE81 33%, #892609 33% 66%, #202020 66%);
 }
+.beak-c-4-5 {
+  background: #892609;
+}
+.beak-c-4-6 {
+  background: linear-gradient(90deg, #892609 50%, #202020 50%);
+}
 
 .navbar-brand {
   margin-bottom: 0;
