@@ -1,7 +1,7 @@
 /*
  * No editar manualmente, archivo autogenerado por mk_data.rb
  */
-let mammalSpecies = ["Ballena franca austral","Ballena jorobada","Cachalote","Delfin comun","Delfin oscuro","Delfín nariz de botella","Elefante marino del sur","Falsa orca","Franciscana","Lobo marino de 2 pelos","Lobo marino de un pelo","Marsopa de anteojos","Marsopa espinosa","Orca","Tonina overa"]
+let mammalSpecies = ["Ballena franca austral","Ballena jorobada","Cachalote","Delfin comun","Delfin oscuro","Delfín nariz de botella","Elefante marino del sur","Falsa orca","Franciscana","Lobo marino de dos pelos","Lobo marino de un pelo","Marsopa de anteojos","Marsopa espinosa","Orca","Tonina overa"]
 let birdSpecies = ["Albatros cabeza gris","Albatros ceja negra","Albatros errante","Albatros pico fino","Albatros real","Biguá","Cisne de cuello negro","Cormorán cuello negro","Cormorán gris","Cormorán imperial","Gallaretas","Gaviota austral","Gaviota cangrejera","Gaviota capucho café","Gaviota cocinera","Gaviotín golondrina","Gaviotín lagunero","Gaviotín pico amarillo","Gaviotín real","Gaviotín sudamericano","Macá común","Macá grande","Ostreros","Paloma antártica","Pardela boreal","Pardela cabeza negra","Pardela oscura","Petrel azulado","Petrel barba blanca","Petrel damero","Petrel de anteojos","Petrel gigante común","Petrel gigante oscuro","Petrel plateado","Pingüino patagónico","Pingüino penacho amarillo","Playero rojizo","Playeros y chorlos en general","Prión pico fino"]
 let data = {
 	alas: {
