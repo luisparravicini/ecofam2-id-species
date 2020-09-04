@@ -9,6 +9,11 @@ class BirdsMatcher
 		this.beakSelectorId = '#matcher-birds-beak';
 		this.beakColorSelectorIdBase = '#matcher-birds-beak-color-';
 
+		this.selectedWingSelector = 'selected-bird-wing';
+		this.selectedFeetSelector = 'selected-bird-feet';
+		this.selectedBeakColorSelector = 'selected-bird-beak-color';
+		this.selectedBirdBeakSelector = 'selected-bird-beak';
+
 		this.matcherDiv = $('#matcher-birds');
 		this.feetDiv = $(this.feetSelectorId);
 		this.wingDiv = $(this.wingSelectorId);
@@ -17,7 +22,6 @@ class BirdsMatcher
 		this.beakColor4Div = $(this.beakColorSelectorIdBase + '4');
 		this.beakColorNone = $(this.beakColorSelectorIdBase + 'other');
 		this.generalDiv = $('#matcher-birds-general');
-		this.selectedBeakColorId = 'selected-bird-beak-color';
 
 		this.selectedValues = {
 			feet: null,
@@ -72,7 +76,7 @@ class BirdsMatcher
 
 		this._setupImageSection(
 			this.wingDiv,
-			'selected-bird-wing',
+			this.selectedWingSelector,
 			'alas',
 			valueKey,
 			null,
@@ -87,7 +91,7 @@ class BirdsMatcher
 
 		this._setupImageSection(
 			this.feetDiv,
-			'selected-bird-feet',
+			this.selectedFeetSelector,
 			'pata',
 			valueKey,
 			null,
@@ -103,12 +107,12 @@ class BirdsMatcher
 
 		this._setupImageSection(
 			this.beakDiv,
-			'selected-bird-beak',
+			this.selectedBirdBeakSelector,
 			'pico',
 			valueKey,
 			(_, value) => {
 				if (value != oldValue)
-					$('#' + this.selectedBeakColorId).empty();
+					$('#' + this.selectedBeakColorSelector).empty();
 			},
 			enabledStates
 		);
@@ -144,7 +148,7 @@ class BirdsMatcher
 
 		this._setupSection(
 			node,
-			this.selectedBeakColorId,
+			this.selectedBeakColorSelector,
 			valueKey,
 			(selected, value) => {
 				selected.append($('<p>').text(elems[value - 1][0]));
@@ -271,11 +275,24 @@ class BirdsMatcher
 		this.candidates.init();
 	}
 
+	_clearSelections() {
+			[
+				this.selectedWingSelector,
+				this.selectedFeetSelector,
+				this.selectedBeakColorSelector,
+				this.selectedBirdBeakSelector,
+			].forEach(x => {
+				$('#' + x).empty();
+			});
+	}
+
 	start() {
 		this._initCandidates();
 
 		return new Promise((resolve, reject) => {
 			this.candidates.show();
+
+			this._clearSelections();
 
 			$('#btn-birds-wing').unbind().on('click', x => {
 				this.askWingInfo(resolve);
