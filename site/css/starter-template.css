@@ -113,3 +113,9 @@ body {
 .navbar-brand {
   margin-bottom: 0;
 }
+
+@media screen and (max-width: 600px) {
+    .navbar-brand {
+      max-width: 190px;
+    }
+}
