@@ -329,12 +329,18 @@ class BirdsMatcher
 			});
 	}
 
+	_hasOption(items, lastIsOther) {
+		if (lastIsOther && items.length > 0)
+			items = items.slice(0, items.length - 1);
+		return (items.filter(x => x).length > 0);
+	}
+
 	_setupButtons() {
 		let button = null;
 		let hasOptions = false;
 
 		button = $('#btn-birds-wing');
-		hasOptions = (this._getWingInfoOptions().length > 0);
+		hasOptions = this._hasOption(this._getWingInfoOptions(), true);
 		button.prop('disabled', !hasOptions);
 		if (hasOptions) {
 			button.unbind().on('click', x => {
@@ -343,7 +349,7 @@ class BirdsMatcher
 		}
 
 		button = $('#btn-birds-foot');
-		hasOptions = (this._getFeetInfoOptions().length > 0);
+		hasOptions = this._hasOption(this._getFeetInfoOptions(), true);
 		button.prop('disabled', !hasOptions);
 		if (hasOptions) {
 			button.unbind().on('click', x => {
@@ -352,7 +358,7 @@ class BirdsMatcher
 		}
 
 		button = $('#btn-birds-beak');
-		hasOptions = (this._getBeakInfoOptions().length > 0);
+		hasOptions = this._hasOption(this._getBeakInfoOptions(), true);
 		button.prop('disabled', !hasOptions);
 		if (hasOptions) {
 			button.unbind().on('click', x => {
@@ -361,7 +367,7 @@ class BirdsMatcher
 		}
 
 		button = $('#btn-birds-feather');
-		hasOptions = (this._getBeakColorInfoOptions().length > 0);
+		hasOptions = this._hasOption(this._getBeakColorInfoOptions(), true);
 		button.prop('disabled', !hasOptions);
 		if (hasOptions) {
 			button.unbind().on('click', x => {
