@@ -69,10 +69,16 @@ class BirdsMatcher
 		return enabledStates;
 	}
 
-	askWingInfo(resolve) {
+	_getWingInfoOptions() {
 		let valueKey = 'wing';
 		let selectorId = this.wingSelectorId;
 		let enabledStates = this._findFutureEnabledStates(valueKey, selectorId);
+		return enabledStates;
+	}
+
+	askWingInfo(resolve) {
+		let valueKey = 'wing';
+		let enabledStates = this._getWingInfoOptions();
 
 		this._setupImageSection(
 			this.wingDiv,
@@ -84,10 +90,16 @@ class BirdsMatcher
 		);
 	}
 
-	askFeetInfo(resolve) {
+	_getFeetInfoOptions() {
 		let valueKey = 'feet';
 		let selectorId = this.feetSelectorId;
 		let enabledStates = this._findFutureEnabledStates(valueKey, selectorId);
+		return enabledStates;
+	}
+
+	askFeetInfo(resolve) {
+		let valueKey = 'feet';
+		let enabledStates = this._getFeetInfoOptions();
 
 		this._setupImageSection(
 			this.feetDiv,
@@ -99,11 +111,17 @@ class BirdsMatcher
 		);
 	}
 
-	askBeakInfo(resolve) {
+	_getBeakInfoOptions() {
 		let valueKey = 'beak';
 		let selectorId = this.beakSelectorId;
-		let oldValue = this.selectedValues[valueKey];
 		let enabledStates = this._findFutureEnabledStates(valueKey, selectorId);
+		return enabledStates;
+	}
+
+	askBeakInfo(resolve) {
+		let valueKey = 'beak';
+		let oldValue = this.selectedValues[valueKey];
+		let enabledStates = this._getBeakInfoOptions();
 
 		this._setupImageSection(
 			this.beakDiv,
@@ -118,13 +136,9 @@ class BirdsMatcher
 		);
 	}
 
-	askBeakColorInfo(resolve) {
+	_getBeakColorInfoOptions() {
 		let beak = this.selectedValues.beak;
 		let allowBeakSelection = true;
-		let keySufix = null;
-		let elems = null;
-		let valueKey = null;
-		let selectorId = null;
 		let enabledStates = null;
 
 		let node = null;
@@ -138,12 +152,41 @@ class BirdsMatcher
 		}
 
 		if (allowBeakSelection) {
-			keySufix = beak.toString();
+			let keySufix = beak.toString();
+			let elems = data['color_pico_' + keySufix].data;
+
+			let valueKey = 'beakColor' + keySufix;
+			let selectorId = this.beakColorSelectorIdBase + beak;
+			enabledStates = this._findFutureEnabledStates(valueKey, selectorId);
+		} else
+			enabledStates = [];
+
+		return enabledStates;
+	}
+
+	askBeakColorInfo(resolve) {
+		let beak = this.selectedValues.beak;
+		let allowBeakSelection = true;
+		let elems = null;
+		let valueKey = null;
+		let enabledStates = null;
+
+		let node = null;
+		if (beak == 2) {
+			node = this.beakColor2Div;
+		} else if (beak == 4) {
+			node = this.beakColor4Div;
+		} else {
+			node = this.beakColorNone;
+			allowBeakSelection = false;
+		}
+
+		if (allowBeakSelection) {
+			let keySufix = beak.toString();
 			elems = data['color_pico_' + keySufix].data;
 
 			valueKey = 'beakColor' + keySufix;
-			selectorId = this.beakColorSelectorIdBase + beak;
-			enabledStates = this._findFutureEnabledStates(valueKey, selectorId);
+			enabledStates = this._getBeakColorInfoOptions();
 		}
 
 		this._setupSection(
@@ -194,7 +237,7 @@ class BirdsMatcher
 
 			this.selectedValues[valueKey] = value;
 			this._filterCandidates();
-
+			this._setupButtons();
 			this._showSection(this.generalDiv);
 		});
 
@@ -286,27 +329,56 @@ class BirdsMatcher
 			});
 	}
 
+	_setupButtons() {
+		let button = null;
+		let hasOptions = false;
+
+		button = $('#btn-birds-wing');
+		hasOptions = (this._getWingInfoOptions().length > 0);
+		button.prop('disabled', !hasOptions);
+		if (hasOptions) {
+			button.unbind().on('click', x => {
+				this.askWingInfo(this.resolve);
+			});
+		}
+
+		button = $('#btn-birds-foot');
+		hasOptions = (this._getFeetInfoOptions().length > 0);
+		button.prop('disabled', !hasOptions);
+		if (hasOptions) {
+			button.unbind().on('click', x => {
+				this.askFeetInfo(this.resolve);
+			});
+		}
+
+		button = $('#btn-birds-beak');
+		hasOptions = (this._getBeakInfoOptions().length > 0);
+		button.prop('disabled', !hasOptions);
+		if (hasOptions) {
+			button.unbind().on('click', x => {
+				this.askBeakInfo(this.resolve);
+			});
+		}
+
+		button = $('#btn-birds-feather');
+		hasOptions = (this._getBeakColorInfoOptions().length > 0);
+		button.prop('disabled', !hasOptions);
+		if (hasOptions) {
+			button.unbind().on('click', x => {
+				this.askBeakColorInfo(this.resolve);
+			});
+		}
+	}
+
 	start() {
 		this._initCandidates();
 
 		return new Promise((resolve, reject) => {
+			this.resolve = resolve;
+
 			this.candidates.show();
-
 			this._clearSelections();
-
-			$('#btn-birds-wing').unbind().on('click', x => {
-				this.askWingInfo(resolve);
-			});
-			$('#btn-birds-foot').unbind().on('click', x => {
-				this.askFeetInfo(resolve);
-			});
-			$('#btn-birds-beak').unbind().on('click', x => {
-				this.askBeakInfo(resolve);
-			});
-			$('#btn-birds-feather').unbind().on('click', x => {
-				this.askBeakColorInfo(resolve);
-			});
-
+			this._setupButtons();
 		});
 	}
 }
